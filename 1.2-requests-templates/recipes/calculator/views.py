@@ -19,37 +19,13 @@ DATA = {
     },
     # можете добавить свои рецепты ;)
 }
-def omlet(request):
+def omlet(request, recipe, ):
     # template = loader.get_template('index.html')
     count = int(request.GET.get('servings', 1))
-    context = {'recipe': {
-        'макароны, г': round(0.3 * count, 2),
-        'сыр, г': round(0.05 * count, 3)
-        }
-    }
-    return HttpResponse(render(request, 'calculator/index.html', context))
-
-def pasta(request):
-    # template = loader.get_template('index.html')
-    count = int(request.GET.get('servings', 1))
-    context = {'recipe': {
-        'яйца, шт': 2 * count,
-        'молоко, л': round(0.1 * count, 2),
-        'соль, ч.л.': round(0.5 * count, 2)
-        }
-    }
-    return HttpResponse(render(request, 'calculator/index.html', context))
-
-def buter(request):
-    # template = loader.get_template('index.html')
-    count = int(request.GET.get('servings', 1))
-    context = {'recipe': {
-        'хлеб, ломтик': 1 * count,
-        'колбаса, ломтик': 1* count,
-        'сыр, ломтик': 1* count,
-        'помидор, ломтик': 1* count,
-        }
-    }
+    ingredients = DATA.get(recipe, {})
+    result = {key: round(value * count, 3) for key, value in ingredients.items()}
+    print(result)
+    context = {'recipe': result}
     return HttpResponse(render(request, 'calculator/index.html', context))
 
 def main(request):
@@ -60,3 +36,4 @@ def main(request):
     }
     context = {'pages': pages}
     return HttpResponse(render(request, 'calculator/home.html', context))
+
