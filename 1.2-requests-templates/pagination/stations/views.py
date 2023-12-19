@@ -21,4 +21,4 @@ def bus_stations(request):
         'bus_stations': page,
         'page': page
     }
-    return render(request, 'stations/index.html', context)
+    return render(request, 'stations/index.html', context) 
