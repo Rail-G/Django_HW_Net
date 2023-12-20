@@ -16,13 +16,6 @@
             </div>
         </div>
         {% endfor %}
-        {% if page.has_previous %}
-            <a href="?page={{ page.previous_page_number }}">Last</a>
-        {% endif %}
-        <span>{{ page.number }}</span>
-        {% if page.has_next %}
-            <a href="?page={{ page.next_page_number }}">Next</a>
-        {% endif %}
-        
+        <a href="/books">Last page</a>
     </div>
 {% endblock %}

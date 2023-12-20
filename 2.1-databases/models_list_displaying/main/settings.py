@@ -106,13 +106,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -124,3 +124,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
+DATE_INPUT_FORMATS = '%Y-%m-%d'
+
+DATE_FORMAT = '%Y-%m-%d'
