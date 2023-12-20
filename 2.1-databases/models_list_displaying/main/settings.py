@@ -58,7 +58,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'robloxmaster123'
+        'PASSWORD': 'password'
     }
 }
 
@@ -110,9 +110,9 @@ LANGUAGE_CODE = 'en-us'
 
 USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
