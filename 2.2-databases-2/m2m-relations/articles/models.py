@@ -30,6 +30,6 @@ class Article(models.Model):
 
     
 class Scope(models.Model):
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='tags_scopes')
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='art_scopes')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='scope_scopes')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scope_scopes')
     is_main = models.BooleanField(default=False)

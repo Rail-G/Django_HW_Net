@@ -12,7 +12,7 @@ class Teacher(models.Model):
     def __str__(self):
         return self.name
 
- 
+  
 class Student(models.Model):
     name = models.CharField(max_length=30, verbose_name='Имя')
     teacher = models.ManyToManyField(Teacher, related_name='students', through='StudTeach')
