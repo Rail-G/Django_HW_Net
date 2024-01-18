@@ -5,7 +5,9 @@ from rest_framework import viewsets
 from .models import Sensor, Measurement
 from .serializers import SensorLCSerializer, SensorRUSerializer, MesurementsSerializer
 
-
+# class SensorViewSet(viewsets.ModelViewSet):
+#     queryset = Sensor.objects.all()
+#     serializer_class = SensorRUSerializer
 
 class SensorCreateList(ListCreateAPIView):
     queryset = Sensor.objects.all()
