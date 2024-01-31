@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from students.filters import CourseFilter
 from students.models import Course
 from students.serializers import CourseSerializer
-
+from rest_framework.exceptions import ValidationError
 
 class CoursesViewSet(ModelViewSet):
 

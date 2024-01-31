@@ -41,7 +41,7 @@ def test_list_course(client, course_factory):
 def test_id_filter_course(client, course_factory):
     course = course_factory(_quantity=2)
     for number in range(len(course)):
-        response = client.get(f'/api/v1/courses/?id={number+1}')
+        response = client.get(f'/api/v1/courses/?id={course[number].id}')
         data = response.json()
         assert response.status_code == 200, 'Статус должен 200'
         assert data[0]['name'] == course[number].name, 'Отсутствуют данные'
@@ -81,3 +81,16 @@ def test_delete_course(client, course_factory):
     response_get = client.get('/api/v1/courses/1/')
     assert response.status_code == 204
     assert response_get.status_code == 404
+
+@pytest.mark.django_db(transaction=True)
+def test_accepted_valid_course(client, course_factory, student_factory):
+    course = course_factory(_quantity=2)
+    student = student_factory(_quantity=21)
+    list_ = []
+    for i in range(20):
+        list_.append(student[i].id)
+    response_put = client.patch('/api/v1/courses/1/', data={'students': list_}, format='json')
+    assert len(response_put.data.get('students', 0)) == 20
+    list_.append(20)
+    response_put = client.patch('/api/v1/courses/1/', data={'students': list_}, format='json')
+    assert response_put.data.get('students') == None
