@@ -67,8 +67,8 @@ def test_post_course(client, student_factory):
 def test_put_course(client, student_factory):
     student = student_factory(_quantity=2)
     response_post = client.post("/api/v1/courses/", data={"name": "Django", "students": [student[0].id, student[1].id]}, format='json')
-    response_put = client.put("/api/v1/courses/1/", data={'name': 'FastAPI'}, format='json')
-    response_get = client.get("/api/v1/courses/1/")
+    response_put = client.patch(f"/api/v1/courses/{response_post.data['id']}/", data={'name': 'FastAPI'}, format='json')
+    response_get = client.get(f"/api/v1/courses/{response_post.data['id']}/")
     assert response_put.status_code == 200
     assert response_post.data['name'] != response_put.data['name']
     assert response_get.data['name'] == response_put.data['name']
@@ -77,8 +77,8 @@ def test_put_course(client, student_factory):
 @pytest.mark.django_db(transaction=True)
 def test_delete_course(client, course_factory):
     course = course_factory(_quantity=2)
-    response = client.delete('/api/v1/courses/1/')
-    response_get = client.get('/api/v1/courses/1/')
+    response = client.delete(f'/api/v1/courses/{course[0].id}/')
+    response_get = client.get(f'/api/v1/courses/{course[0].id}/')
     assert response.status_code == 204
     assert response_get.status_code == 404
 
@@ -89,8 +89,8 @@ def test_accepted_valid_course(client, course_factory, student_factory):
     list_ = []
     for i in range(20):
         list_.append(student[i].id)
-    response_put = client.patch('/api/v1/courses/1/', data={'students': list_}, format='json')
+    response_put = client.patch(f'/api/v1/courses/{course[0].id}/', data={'students': list_}, format='json')
     assert len(response_put.data.get('students', 0)) == 20
     list_.append(20)
-    response_put = client.patch('/api/v1/courses/1/', data={'students': list_}, format='json')
+    response_put = client.patch(f'/api/v1/courses/{course[0].id}/', data={'students': list_}, format='json')
     assert response_put.data.get('students') == None
