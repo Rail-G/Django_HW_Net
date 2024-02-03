@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
-from advertisements.views import AdvertisementViewSet
+from advertisements.views import AdvertisementViewSet, FavoriteViewSet
 
 router = DefaultRouter()
 router.register('adver', AdvertisementViewSet)
+router.register('favorite', FavoriteViewSet)
 
 
 urlpatterns = [
